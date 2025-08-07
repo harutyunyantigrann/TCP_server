@@ -1,6 +1,11 @@
 import socket
 import threading
-from flask import Flask, request, render_template
+from jinja2 import Environment, FileSystemLoader
+sessions = {}
+def auth_jinja(error_msg=None):
+    env = Environment(loader=FileSystemLoader('Templates'))
+    html = env.get_template('auth.html')
+    return html.render(error=error_msg)
 def get_data(client_socket):
     data = b""
     body = b""
@@ -28,7 +33,13 @@ def get_data(client_socket):
             break
     return method.decode(), path.decode(), version.decode(), headers, body.decode()
 def connect(client_socket, client_address):
-    print(f"Client with {client_address[0]} is connected!")
+    try:
+        print(f"Client with {client_address[0]} is connected!")
+        method, path, version, headers, body = get_data(client_socket)
+    except Exception as e:
+        print(e)
+    finally:
+        client_socket.close()
 
 try:
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

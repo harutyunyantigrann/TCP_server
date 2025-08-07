@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login / Register</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding-top: 50px;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 400px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2, h3 {
+      text-align: center;
+      margin: 0 0 15px 0;
+    }
+    form {
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .error {
+      color: red;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+    
+    <h2>Welcome</h2>
+    
+    <h3>Login</h3>
+    <form action="/auth" method="POST">
+      <input type="hidden" name="action" value="login" />
+      <label for="login-username">Username:</label>
+      <input id="login-username" type="text" name="username" required />
+      
+      <label for="login-password">Password:</label>
+      <input id="login-password" type="password" name="password" required />
+      
+      <button type="submit">Login</button>
+    </form>
+    
+    <h3>Register</h3>
+    <form action="/auth" method="POST">
+      <input type="hidden" name="action" value="register" />
+      <label for="register-username">Username:</label>
+      <input id="register-username" type="text" name="username" required />
+      
+      <label for="register-password">Password:</label>
+      <input id="register-password" type="password" name="password" required />
+      
+      <button type="submit">Register</button>
+    </form>
+  </div>
+</body>
+</html>
