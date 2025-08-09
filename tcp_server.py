@@ -6,6 +6,10 @@ def auth_jinja(error_msg=None):
     env = Environment(loader=FileSystemLoader('Templates'))
     html = env.get_template('auth.html')
     return html.render(error=error_msg)
+def notfound_jinja():
+    env = Environment(loader=FileSystemLoader('Templates'))
+    html = env.get_template('404.html')
+    return html.render()
 def get_data(client_socket):
     data = b""
     body = b""
@@ -25,6 +29,15 @@ def get_data(client_socket):
             key, value = header.split(b":",1)
             headers[key.decode().strip().lower()] = (value.decode()).strip()
     content_length = int(headers.get("content-length", 0))
+    if(content_length > 1048576):
+        response = (
+            "HTTP/1.1 413 Payload Too Large\r\n"
+            "Content-Length: 0\r\n"
+            "\r\n"
+        )
+        client_socket.sendall(response.encode())
+        client_socket.close()
+        return
     while len(body) < content_length:
         temp = client_socket.recv(4096)
         if temp:
@@ -35,7 +48,30 @@ def get_data(client_socket):
 def connect(client_socket, client_address):
     try:
         print(f"Client with {client_address[0]} is connected!")
-        method, path, version, headers, body = get_data(client_socket)
+        data = get_data(client_socket)
+        if data is None:
+            return
+        method, path, version, headers, body = data
+        if method == "GET" and path == "/login":
+            body = auth_jinja().encode("utf-8")
+            response = (
+                "HTTP/1.1 200 OK\r\n"
+                "Content-Type: text/html\r\n"
+                f"Content-Length: {len(body)}\r\n"
+                "\r\n"
+            ).encode("utf-8")
+            response = response + body
+
+        else:
+            body = notfound_jinja().encode("utf-8")
+            response = (
+                "HTTP/1.1 404 Not Found\r\n"
+                f"Content-Length: {len(body)}\r\n"
+                "Content-Type: text/html; charset=utf-8\r\n"
+                "\r\n"
+            ).encode("utf-8")
+            response = response + body
+        client_socket.sendall(response)
     except Exception as e:
         print(e)
     finally:
