@@ -1,6 +1,13 @@
 import socket
 import threading
 from jinja2 import Environment, FileSystemLoader
+import logging
+logging.basicConfig(
+    filename="server.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    filemode="a"
+)
 sessions = {}
 def auth_jinja(error_msg=None):
     env = Environment(loader=FileSystemLoader('Templates'))
@@ -10,7 +17,7 @@ def notfound_jinja():
     env = Environment(loader=FileSystemLoader('Templates'))
     html = env.get_template('404.html')
     return html.render()
-def get_data(client_socket):
+def get_data(client_socket, client_address):
     data = b""
     body = b""
     while b"\r\n\r\n" not in data:
@@ -35,6 +42,7 @@ def get_data(client_socket):
             "Content-Length: 0\r\n"
             "\r\n"
         )
+        logging.critical(f"We get so much content from {client_address[0]}")
         client_socket.sendall(response.encode())
         client_socket.close()
         return
@@ -47,11 +55,13 @@ def get_data(client_socket):
     return method.decode(), path.decode(), version.decode(), headers, body.decode()
 def connect(client_socket, client_address):
     try:
-        print(f"Client with {client_address[0]} is connected!")
-        data = get_data(client_socket)
+        logging.info(f"Client connected {client_address[0]}:{client_address[1]}")
+        data = get_data(client_socket, client_address)
         if data is None:
+            logging.error("Data is empty")
             return
         method, path, version, headers, body = data
+        logging.info(f"We get method: {method}, path = {path} from user {client_address[0]}")
         if method == "GET" and path == "/login":
             body = auth_jinja().encode("utf-8")
             response = (
@@ -71,9 +81,10 @@ def connect(client_socket, client_address):
                 "\r\n"
             ).encode("utf-8")
             response = response + body
+            logging.error("We get 404 Not Found error")
         client_socket.sendall(response)
     except Exception as e:
-        print(e)
+        logging.exception(f"We get expect error {e} from {client_address[0]}")
     finally:
         client_socket.close()
 
@@ -81,12 +92,12 @@ try:
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind(("127.0.0.1", 8080))
     server_socket.listen(5)
-    print("Server is listening on 127.0.0.1/8080")
+    logging.info("Server is start work on IP: 127.0.0.1 and port: 8080")
     while True:
         client_socket, client_address = server_socket.accept()
         thread = threading.Thread(target=connect, args=(client_socket, client_address))
         thread.start()
 except Exception as e:
-    print(e)
+    logging.exception("We get fatal error, connection with server socket is close")
 finally:
     server_socket.close()
