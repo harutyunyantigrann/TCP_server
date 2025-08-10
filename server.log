@@ -1,8 +1,41 @@
-2025-08-09 21:33:47,063 - INFO - Server is start work on IP: 127.0.0.1 and port: 8080
-2025-08-09 21:34:06,305 - INFO - Client connected 127.0.0.1:37542
-2025-08-09 21:34:06,412 - INFO - We get method: GET, path = /login from user 127.0.0.1
-2025-08-09 21:34:06,547 - INFO - Client connected 127.0.0.1:37554
-2025-08-09 21:34:06,547 - INFO - We get method: GET, path = /favicon.ico from user 127.0.0.1
-2025-08-09 21:34:06,548 - ERROR - We get 404 Not Found error
-2025-08-09 21:34:16,763 - INFO - Client connected 127.0.0.1:37690
-2025-08-09 21:34:16,833 - INFO - We get method: GET, path = /login from user 127.0.0.1
+2025-08-10 18:36:38,449 - INFO - Client connected 127.0.0.1:57114
+2025-08-10 18:36:38,489 - INFO - We get method: GET, path = /login from user 127.0.0.1
+2025-08-10 18:36:53,120 - INFO - Client connected 127.0.0.1:50048
+2025-08-10 18:36:53,120 - INFO - We get method: POST, path = /signup from user 127.0.0.1
+2025-08-10 18:43:53,795 - INFO - Server is start work on IP: 127.0.0.1 and port: 8080
+2025-08-10 18:44:03,147 - INFO - Client connected 127.0.0.1:43218
+2025-08-10 18:44:03,238 - INFO - We get method: GET, path = /login from user 127.0.0.1
+2025-08-10 18:44:12,751 - INFO - Client connected 127.0.0.1:43016
+2025-08-10 18:44:12,751 - INFO - We get method: POST, path = /signup from user 127.0.0.1
+2025-08-10 18:44:12,751 - CRITICAL - Login: register, pass: admin&password=qwerty1234
+2025-08-10 18:44:12,780 - CRITICAL - True
+2025-08-10 18:47:21,762 - INFO - Server is start work on IP: 127.0.0.1 and port: 8080
+2025-08-10 18:47:28,535 - INFO - Client connected 127.0.0.1:46660
+2025-08-10 18:47:28,535 - INFO - We get method: POST, path = /signup from user 127.0.0.1
+2025-08-10 18:47:28,535 - CRITICAL - action=register&username=admin&password=qwerty1234
+2025-08-10 18:47:28,535 - CRITICAL - Login: register, pass: admin&password=qwerty1234
+2025-08-10 18:47:28,561 - CRITICAL - True
+2025-08-10 18:47:35,382 - INFO - Client connected 127.0.0.1:46670
+2025-08-10 18:47:35,382 - INFO - We get method: POST, path = /signup from user 127.0.0.1
+2025-08-10 18:47:35,382 - CRITICAL - action=register&username=vaxo1&password=12345
+2025-08-10 18:47:35,382 - CRITICAL - Login: register, pass: vaxo1&password=12345
+2025-08-10 18:47:35,408 - CRITICAL - True
+2025-08-10 18:54:58,443 - INFO - Server is start work on IP: 127.0.0.1 and port: 8080
+2025-08-10 18:55:03,217 - INFO - Client connected 127.0.0.1:33208
+2025-08-10 18:55:03,299 - INFO - We get method: GET, path = /login from user 127.0.0.1
+2025-08-10 18:55:13,171 - INFO - Client connected 127.0.0.1:48462
+2025-08-10 18:55:13,171 - INFO - We get method: POST, path = /signup from user 127.0.0.1
+2025-08-10 18:55:13,192 - CRITICAL - False
+2025-08-10 18:55:13,220 - INFO - Success registration; username: admin
+2025-08-10 18:55:13,224 - INFO - Client connected 127.0.0.1:48474
+2025-08-10 18:55:13,227 - INFO - We get method: GET, path = /login from user 127.0.0.1
+2025-08-10 18:57:57,623 - INFO - Server is start work on IP: 127.0.0.1 and port: 8080
+2025-08-10 18:58:15,645 - INFO - Client connected 127.0.0.1:41808
+2025-08-10 18:58:15,646 - INFO - We get method: POST, path = /signup from user 127.0.0.1
+2025-08-10 18:58:15,693 - INFO - Success registration; username: Test_2
+2025-08-10 19:01:57,844 - INFO - Server is start work on IP: 127.0.0.1 and port: 8080
+2025-08-10 19:02:08,329 - INFO - Client connected 127.0.0.1:58280
+2025-08-10 19:02:08,329 - INFO - We get method: GET, path = /login from user 127.0.0.1
+2025-08-10 19:02:16,500 - INFO - Client connected 127.0.0.1:53084
+2025-08-10 19:02:16,500 - INFO - We get method: POST, path = /signup from user 127.0.0.1
+2025-08-10 19:02:16,545 - INFO - Success registration; username: Test_3

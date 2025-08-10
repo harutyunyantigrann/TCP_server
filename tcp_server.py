@@ -2,6 +2,8 @@ import socket
 import threading
 from jinja2 import Environment, FileSystemLoader
 import logging
+import psycopg2
+from urllib.parse import parse_qs
 logging.basicConfig(
     filename="server.log",
     level=logging.INFO,
@@ -9,6 +11,41 @@ logging.basicConfig(
     filemode="a"
 )
 sessions = {}
+def check_username(username):
+    try:
+        with psycopg2.connect(
+            dbname="tcp_server",
+            user="postgres",
+            password="test_pass_for_tcp",
+            host="localhost",
+            port="5432"
+        ) as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT * FROM auth WHERE username = %s",(username, ))
+                data = cur.fetchone()
+                if data:
+                    return True
+                else:
+                    return False
+    except Exception as e:
+        logging.exception(f"Occured exception on check username : {username}")
+        return False
+def insert_credentials(username, password):
+    try:
+        with psycopg2.connect(
+            dbname="tcp_server",
+            user="postgres",
+            password="test_pass_for_tcp",
+            host="localhost",
+            port="5432"
+        ) as conn:
+            with conn.cursor() as cur:
+                cur.execute("INSERT INTO auth (username,password) VALUES (%s,%s)",(username,password))
+                conn.commit()
+                logging.info(f"Success registration; username: {username}")
+    except Exception as e:
+        logging.exception(f"Occurred exception on auth for username: {username}")
+
 def auth_jinja(error_msg=None):
     env = Environment(loader=FileSystemLoader('Templates'))
     html = env.get_template('auth.html')
@@ -71,7 +108,28 @@ def connect(client_socket, client_address):
                 "\r\n"
             ).encode("utf-8")
             response = response + body
-
+        elif method == "POST" and path == "/signup":
+            parsed_credentials = parse_qs(body)
+            username = parsed_credentials.get('username', [None])[0]
+            password = parsed_credentials.get('password', [None])[0]
+            if check_username(username):
+                body = auth_jinja(error_msg="This username is already taken").encode("utf-8")
+                response = (
+                    "HTTP/1.1 200 OK\r\n"
+                    "Content-Type: text/html\r\n"
+                    f"Content-Length: {len(body)}\r\n"
+                    "\r\n"
+                ).encode("utf-8")
+                response = response + body
+            else:
+                insert_credentials(username,password)
+                body = auth_jinja(error_msg="You are registed successfully!").encode("utf-8")
+                response = (
+                "HTTP/1.1 200 OK\r\n"
+                "Content-Type: text/html\r\n"
+                f"Content-Length:{len(body)}\r\n\r\n"
+                ).encode("utf-8")
+                response+=body
         else:
             body = notfound_jinja().encode("utf-8")
             response = (
@@ -82,6 +140,8 @@ def connect(client_socket, client_address):
             ).encode("utf-8")
             response = response + body
             logging.error("We get 404 Not Found error")
+        
+        
         client_socket.sendall(response)
     except Exception as e:
         logging.exception(f"We get expect error {e} from {client_address[0]}")

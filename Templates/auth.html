@@ -72,7 +72,7 @@
     <h2>Welcome</h2>
     
     <h3>Login</h3>
-    <form action="/auth" method="POST">
+    <form action="/signin" method="POST">
       <input type="hidden" name="action" value="login" />
       <label for="login-username">Username:</label>
       <input id="login-username" type="text" name="username" required />
@@ -84,7 +84,7 @@
     </form>
     
     <h3>Register</h3>
-    <form action="/auth" method="POST">
+    <form action="/signup" method="POST">
       <input type="hidden" name="action" value="register" />
       <label for="register-username">Username:</label>
       <input id="register-username" type="text" name="username" required />
