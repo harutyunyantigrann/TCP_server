@@ -39,3 +39,24 @@
 2025-08-10 19:02:16,500 - INFO - Client connected 127.0.0.1:53084
 2025-08-10 19:02:16,500 - INFO - We get method: POST, path = /signup from user 127.0.0.1
 2025-08-10 19:02:16,545 - INFO - Success registration; username: Test_3
+2025-08-12 19:09:22,490 - INFO - Server is start work on IP: 127.0.0.1 and port: 8080
+2025-08-12 19:09:34,236 - INFO - Client connected 127.0.0.1:59568
+2025-08-12 19:09:34,324 - INFO - We get method: GET, path = /login from user 127.0.0.1
+2025-08-12 19:09:57,981 - INFO - Client connected 127.0.0.1:36424
+2025-08-12 19:09:57,982 - INFO - We get method: POST, path = /signup from user 127.0.0.1
+2025-08-12 19:09:58,080 - INFO - Success registration; username: Mr_Headshot
+2025-08-12 19:10:07,006 - INFO - Client connected 127.0.0.1:51738
+2025-08-12 19:10:07,006 - INFO - We get method: POST, path = /signin from user 127.0.0.1
+2025-08-12 19:10:29,775 - INFO - Client connected 127.0.0.1:37886
+2025-08-12 19:10:29,828 - INFO - We get method: GET, path = /login from user 127.0.0.1
+2025-08-12 19:10:39,008 - INFO - Client connected 127.0.0.1:56028
+2025-08-12 19:10:39,009 - INFO - We get method: POST, path = /signup from user 127.0.0.1
+2025-08-12 19:10:47,852 - INFO - Client connected 127.0.0.1:40464
+2025-08-12 19:10:47,853 - INFO - We get method: POST, path = /signup from user 127.0.0.1
+2025-08-12 19:10:47,893 - INFO - Success registration; username: Surenchik
+2025-08-12 19:10:54,801 - INFO - Client connected 127.0.0.1:40472
+2025-08-12 19:10:54,801 - INFO - We get method: POST, path = /signin from user 127.0.0.1
+2025-08-12 19:10:57,660 - INFO - Client connected 127.0.0.1:43614
+2025-08-12 19:10:57,660 - INFO - We get method: POST, path = /signin from user 127.0.0.1
+2025-08-12 19:11:00,981 - INFO - Client connected 127.0.0.1:43622
+2025-08-12 19:11:00,981 - INFO - We get method: POST, path = /signin from user 127.0.0.1

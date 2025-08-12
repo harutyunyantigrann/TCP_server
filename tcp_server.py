@@ -4,6 +4,7 @@ from jinja2 import Environment, FileSystemLoader
 import logging
 import psycopg2
 from urllib.parse import parse_qs
+import uuid
 logging.basicConfig(
     filename="server.log",
     level=logging.INFO,
@@ -11,6 +12,21 @@ logging.basicConfig(
     filemode="a"
 )
 sessions = {}
+def get_messages(username):
+    try:
+        with psycopg2.connect(
+            dbname="tcp_server",
+            user="postgres",
+            password="test_pass_for_tcp",
+            host="localhost",
+            port="5432"
+        ) as conn:
+            with conn.cursor() as cur:
+                cur.execute(f"SELECT sender, content, created_at FROM messages WHERE receiver = %s", (username, ))
+                messages = cur.fetchall()
+                return messages
+    except Exception as e:
+        logging.exception("Exception on get_messages")
 def check_username(username):
     try:
         with psycopg2.connect(
@@ -45,11 +61,33 @@ def insert_credentials(username, password):
                 logging.info(f"Success registration; username: {username}")
     except Exception as e:
         logging.exception(f"Occurred exception on auth for username: {username}")
-
+def check_credentials(username, password):
+    try:
+        with psycopg2.connect(
+            dbname="tcp_server",
+            user="postgres",
+            password="test_pass_for_tcp",
+            host="localhost",
+            port="5432"
+        ) as conn:
+            with conn.cursor() as cur:
+                cur.execute(f"SELECT * FROM auth WHERE username=%s AND password=%s", (username, password))
+                result = cur.fetchone()
+                if result:
+                    return True
+                else:
+                    return False
+    except Exception as e:
+        return False
+        logging.exception(f"Some exception in check_credentials with username: {username}")
 def auth_jinja(error_msg=None):
     env = Environment(loader=FileSystemLoader('Templates'))
     html = env.get_template('auth.html')
     return html.render(error=error_msg)
+def profile_jinja(username, messages):
+    env = Environment(loader=FileSystemLoader('Templates'))
+    body = env.get_template('profile.html')
+    return body.render(username=username, messages=messages)
 def notfound_jinja():
     env = Environment(loader=FileSystemLoader('Templates'))
     html = env.get_template('404.html')
@@ -115,12 +153,25 @@ def connect(client_socket, client_address):
             if check_username(username):
                 body = auth_jinja(error_msg="This username is already taken").encode("utf-8")
                 response = (
-                    "HTTP/1.1 200 OK\r\n"
+                    "HTTP/1.1 400 Bad Request\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n"
                     "\r\n"
                 ).encode("utf-8")
                 response = response + body
+                client_socket.sendall(response)
+                return
+            elif len(password) < 8:
+                body = auth_jinja(error_msg="Password can`t be less than 8 symbols").encode()
+                response = (
+                    "HTTP/1.1 400 Bad Request\r\n"
+                    "Content-Type: text/html\r\n"
+                    f"Content-Length: {len(body)}\r\n"
+                    "\r\n"
+                ).encode("utf-8")
+                response+= body
+                client_socket.sendall(response)
+                return
             else:
                 insert_credentials(username,password)
                 body = auth_jinja(error_msg="You are registed successfully!").encode("utf-8")
@@ -130,6 +181,42 @@ def connect(client_socket, client_address):
                 f"Content-Length:{len(body)}\r\n\r\n"
                 ).encode("utf-8")
                 response+=body
+        elif method == "POST" and path == "/signin":
+            parsed_credentials = parse_qs(body)
+            username = parsed_credentials.get('username', [None])[0]
+            password = parsed_credentials.get('password', [None])[0]
+            if username == None or password == None:
+                body = auth_jinja("Username or password cant be empty!").encode("utf-8")
+                response = (
+                    "HTTP/1.1 400 Bad request\r\n"
+                    "Content-Type: text/html\r\n"
+                    f"Content-Length: {len(body)}\r\n"
+                    "\r\n"
+                ).encode("utf-8")
+                response+= body
+                client_socket.sendall(response)
+                return
+            if not check_credentials(username, password):
+                body = auth_jinja(error_msg="Invalid username or password").encode("utf-8")
+                response = (
+                    "HTTP/1.1 200 OK\r\n"
+                    "Content-Type: text/html\r\n"
+                    f"Content-Length: {len(body)}\r\n"
+                    "\r\n"
+                ).encode("utf-8")
+                client_socket.sendall(response)
+                return
+            session_id = uuid.uuid4()
+            sessions[session_id] = username
+            body = profile_jinja(username,get_messages(username)).encode("utf-8")
+            response = (
+                "HTTP/1.1 200 OK\r\n"
+                "Content-Type: text/html\r\n"
+                f"Content-Length: {len(body)}\r\n"
+                f"Set-Cookie: session_id={session_id}; HttpOnly; Path=/\r\n"
+                "\r\n"
+            ).encode("utf-8")
+            response+=body
         else:
             body = notfound_jinja().encode("utf-8")
             response = (

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Profile</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root{
+      --bg: #f4f4f4;
+      --card: #ffffff;
+      --accent: #007BFF;
+      --muted: #666;
+      --success: #0f9d58;
+    }
+    html,body{height:100%;margin:0;font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+    body{
+      background: linear-gradient(180deg, var(--bg), #e9eefb);
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      padding:40px 12px;
+    }
+    .container{
+      width:720px;
+      max-width:100%;
+      background:var(--card);
+      border-radius:12px;
+      box-shadow:0 8px 30px rgba(20,30,60,0.08);
+      padding:22px;
+      box-sizing:border-box;
+    }
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      margin-bottom:18px;
+    }
+    .title{font-size:20px;font-weight:700;}
+    .sub{color:var(--muted); font-size:13px;}
+    .profile-row{display:flex;gap:20px;align-items:flex-start;}
+    .profile-card{flex:0 0 240px;background:#fbfcff;border-radius:10px;padding:16px;box-shadow:0 4px 16px rgba(10,20,40,0.03);}
+    .profile-card h3{margin:0 0 8px 0;font-size:16px;}
+    .profile-info p{margin:8px 0;color:var(--muted);font-size:14px;}
+    .main-area{flex:1;display:flex;flex-direction:column;gap:12px;}
+    .messages{height:360px;overflow:auto;padding:12px;border-radius:8px;background:#f7f9ff;border:1px solid rgba(0,0,0,0.03);}
+    .msg{padding:10px;border-radius:8px;margin-bottom:10px;max-width:78%;}
+    .msg.from{background:#ffffff;border:1px solid rgba(0,0,0,0.04);align-self:flex-start;}
+    .msg.me{background:linear-gradient(90deg,var(--accent),#0056b3);color:#fff;align-self:flex-end;}
+    .msg .meta{font-size:11px;color:var(--muted);margin-bottom:6px;}
+    form.send-form{display:flex;gap:10px;margin-top:8px;}
+    input[type="text"], textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);box-sizing:border-box;font-size:14px}
+    textarea{resize:vertical;min-height:72px;max-height:180px}
+    button{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:600}
+    .small-note{font-size:13px;color:var(--muted);margin-top:6px}
+    .alert{padding:10px;border-radius:8px;font-size:14px}
+    .alert.error{background:#fff1f0;border:1px solid #ffd6d0;color:#a12a2a}
+    .alert.success{background:#ecf9f0;border:1px solid #c6f0d6;color:var(--success)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <div class="title">Welcome, {{ username | default("Guest") }}</div>
+        <div class="sub">This is your test profile — messages are ephemeral.</div>
+      </div>
+      <div class="sub">Profile ID: <strong>{{ user_id | default("—") }}</strong></div>
+    </div>
+
+    {% if error %}
+      <div class="alert error">{{ error }}</div>
+    {% endif %}
+    {% if success %}
+      <div class="alert success">{{ success }}</div>
+    {% endif %}
+
+    <div class="profile-row">
+      <div class="profile-card">
+        <h3>Profile</h3>
+        <div class="profile-info">
+          <p><strong>Username:</strong> {{ username | default("—") }}</p>
+          <p><strong>Created:</strong> {{ created_at | default("—") }}</p>
+          <p class="small-note">Use this panel to send a message to another user (for testing).</p>
+        </div>
+      </div>
+
+      <div class="main-area">
+        <div class="messages" id="messages">
+          {% if messages %}
+            {% for m in messages %}
+              <div class="msg {% if m.from == username %}me{% else %}from{% endif %}">
+                <div class="meta">{{ m.from }} · {{ m.time }}</div>
+                <div class="text">{{ m.text }}</div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="sub" style="padding:12px">No messages yet — send the first one!</div>
+          {% endif %}
+        </div>
+
+        <form class="send-form" action="/message" method="POST">
+          <input type="hidden" name="from" value="{{ username }}">
+          <input type="text" name="to" placeholder="Recipient username (e.g. vaxo1)" required>
+          <textarea name="text" placeholder="Type your message..." required></textarea>
+          <button type="submit">Send</button>
+        </form>
+
+        <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
+          <div class="small-note">Tip: messages are stored on server side — for test only.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
