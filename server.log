@@ -60,3 +60,267 @@
 2025-08-12 19:10:57,660 - INFO - We get method: POST, path = /signin from user 127.0.0.1
 2025-08-12 19:11:00,981 - INFO - Client connected 127.0.0.1:43622
 2025-08-12 19:11:00,981 - INFO - We get method: POST, path = /signin from user 127.0.0.1
+2025-08-14 16:23:15,331 - INFO - Server is start work on IP: 127.0.0.1 and port: 8080
+2025-08-14 16:24:08,738 - INFO - Client connected 127.0.0.1:39682
+2025-08-14 16:24:08,825 - INFO - We get method: GET, path = /login from user 127.0.0.1
+2025-08-14 16:24:17,842 - INFO - Client connected 127.0.0.1:38800
+2025-08-14 16:24:17,843 - INFO - We get method: POST, path = /signin from user 127.0.0.1
+2025-08-14 16:24:34,864 - INFO - Client connected 127.0.0.1:48370
+2025-08-14 16:24:34,864 - INFO - We get method: POST, path = /message from user 127.0.0.1
+2025-08-14 16:24:34,864 - DEBUG - from=Mr_Headshot&to=Surenchik&text=Test+message
+2025-08-14 16:24:34,865 - ERROR - We get expect error cannot access local variable 'response' where it is not associated with a value from 127.0.0.1
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 235, in connect
+    client_socket.sendall(response)
+                          ^^^^^^^^
+UnboundLocalError: cannot access local variable 'response' where it is not associated with a value
+2025-08-14 16:55:07,906 - INFO - Server is start work on IP: 127.0.0.1 and port: 8080
+2025-08-14 16:55:16,084 - INFO - Client connected 127.0.0.1:51960
+2025-08-14 16:55:16,085 - INFO - We get method: POST, path = /message from user 127.0.0.1
+2025-08-14 16:55:16,085 - DEBUG - from=Mr_Headshot&to=Surenchik&text=Test+message
+2025-08-14 16:55:16,146 - ERROR - We get exception on insert_messages
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 39, in insert_messages
+    with conn.cursor as cur:
+TypeError: 'builtin_function_or_method' object does not support the context manager protocol
+2025-08-14 16:55:20,804 - INFO - Client connected 127.0.0.1:51968
+2025-08-14 16:55:20,865 - INFO - We get method: GET, path = /login from user 127.0.0.1
+2025-08-14 16:55:20,980 - INFO - Client connected 127.0.0.1:51978
+2025-08-14 16:55:20,981 - ERROR - We get expect error not enough values to unpack (expected 2, got 1) from 127.0.0.1
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 149, in connect
+    data = get_data(client_socket, client_address)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 119, in get_data
+    headers_list, body = data.split(b"\r\n\r\n", 1)
+    ^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+2025-08-14 16:55:34,237 - INFO - Client connected 127.0.0.1:50482
+2025-08-14 16:55:34,237 - INFO - We get method: POST, path = /signin from user 127.0.0.1
+2025-08-14 16:56:23,614 - ERROR - We get fatal error, connection with server socket is close
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 283, in <module>
+    server_socket.bind(("127.0.0.1", 8080))
+OSError: [Errno 98] Address already in use
+2025-08-14 16:56:29,747 - ERROR - We get fatal error, connection with server socket is close
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 283, in <module>
+    server_socket.bind(("127.0.0.1", 8080))
+OSError: [Errno 98] Address already in use
+2025-08-14 16:56:37,835 - ERROR - We get fatal error, connection with server socket is close
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 283, in <module>
+    server_socket.bind(("127.0.0.1", 8080))
+OSError: [Errno 98] Address already in use
+2025-08-14 16:57:08,203 - INFO - Server is start work on IP: 127.0.0.1 and port: 8080
+2025-08-14 16:57:11,401 - INFO - Client connected 127.0.0.1:50188
+2025-08-14 16:57:11,452 - INFO - We get method: GET, path = /login from user 127.0.0.1
+2025-08-14 16:57:17,458 - INFO - Client connected 127.0.0.1:40962
+2025-08-14 16:57:17,458 - INFO - We get method: POST, path = /signin from user 127.0.0.1
+2025-08-14 16:57:20,446 - INFO - Client connected 127.0.0.1:40976
+2025-08-14 16:57:20,446 - INFO - We get method: POST, path = /signin from user 127.0.0.1
+2025-08-14 16:57:27,461 - INFO - Client connected 127.0.0.1:55742
+2025-08-14 16:57:27,461 - INFO - We get method: POST, path = /signin from user 127.0.0.1
+2025-08-14 17:03:30,600 - INFO - Server is start work on IP: 127.0.0.1 and port: 8080
+2025-08-14 17:03:32,928 - INFO - Client connected 127.0.0.1:36370
+2025-08-14 17:03:32,993 - INFO - We get method: GET, path = /login from user 127.0.0.1
+2025-08-14 17:03:43,299 - INFO - Client connected 127.0.0.1:49756
+2025-08-14 17:03:43,300 - INFO - We get method: POST, path = /signin from user 127.0.0.1
+2025-08-14 17:04:22,028 - INFO - Client connected 127.0.0.1:47040
+2025-08-14 17:04:22,029 - INFO - We get method: POST, path = /message from user 127.0.0.1
+2025-08-14 17:04:22,029 - DEBUG - from=Mr_Headshot&to=Vaxo&text=Barev+azizo
+2025-08-14 17:05:22,422 - INFO - Client connected 127.0.0.1:42528
+2025-08-14 17:05:22,422 - INFO - We get method: POST, path = /message from user 127.0.0.1
+2025-08-14 17:05:22,422 - DEBUG - from=Mr_Headshot&to=admin&text=test_message
+2025-08-14 17:05:22,487 - ERROR - We get exception on insert_messages
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 39, in insert_messages
+    with conn.cursor as cur:
+TypeError: 'builtin_function_or_method' object does not support the context manager protocol
+2025-08-14 17:05:30,491 - INFO - Client connected 127.0.0.1:42536
+2025-08-14 17:05:30,543 - INFO - We get method: GET, path = /login from user 127.0.0.1
+2025-08-14 17:05:35,853 - INFO - Client connected 127.0.0.1:40718
+2025-08-14 17:05:35,853 - INFO - We get method: POST, path = /signin from user 127.0.0.1
+2025-08-14 17:17:09,986 - INFO - Server started on 127.0.0.1:8080
+2025-08-14 17:17:14,346 - INFO - New connection from 127.0.0.1:34972
+2025-08-14 17:17:14,433 - DEBUG - Received GET request to /login from 127.0.0.1
+2025-08-14 17:17:14,433 - INFO - Request GET /login from 127.0.0.1
+2025-08-14 17:17:14,433 - INFO - Serving login page to 127.0.0.1
+2025-08-14 17:17:14,437 - DEBUG - Rendering login page. Error: None
+2025-08-14 17:17:14,437 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:17:20,419 - INFO - New connection from 127.0.0.1:34978
+2025-08-14 17:17:20,419 - DEBUG - Received POST request to /signin from 127.0.0.1
+2025-08-14 17:17:20,419 - INFO - Request POST /signin from 127.0.0.1
+2025-08-14 17:17:20,419 - DEBUG - Signin attempt: admin
+2025-08-14 17:17:20,419 - ERROR - Error while handling connection from 127.0.0.1: cannot access local variable 'response' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 225, in connect
+    client_socket.sendall(response)
+                          ^^^^^^^^
+UnboundLocalError: cannot access local variable 'response' where it is not associated with a value
+2025-08-14 17:17:20,421 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:24:46,855 - INFO - Server socket closed
+2025-08-14 17:24:49,270 - INFO - Server started on 127.0.0.1:8080
+2025-08-14 17:24:54,150 - INFO - Client connected 127.0.0.1:49268
+2025-08-14 17:24:54,231 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-14 17:24:54,231 - INFO - Request GET /login from 127.0.0.1
+2025-08-14 17:24:54,236 - DEBUG - Rendering login page. Error: None
+2025-08-14 17:24:54,236 - INFO - Serving login page to 127.0.0.1
+2025-08-14 17:24:54,237 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:24:59,520 - INFO - Client connected 127.0.0.1:49270
+2025-08-14 17:24:59,520 - DEBUG - Received data from 127.0.0.1: POST /signin
+2025-08-14 17:24:59,520 - INFO - Request POST /signin from 127.0.0.1
+2025-08-14 17:24:59,521 - DEBUG - Signin attempt: admin
+2025-08-14 17:24:59,548 - DEBUG - Credentials check for 'admin': True
+2025-08-14 17:24:59,568 - DEBUG - Retrieved 0 messages for user admin
+2025-08-14 17:24:59,575 - DEBUG - Rendering profile page for user admin. Error: None, Success: None
+2025-08-14 17:24:59,575 - INFO - User admin logged in, session aa1f2cdc-fd55-4b17-8373-6ea1a380e38d
+2025-08-14 17:24:59,576 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:25:08,334 - INFO - Client connected 127.0.0.1:54094
+2025-08-14 17:25:08,334 - DEBUG - Received data from 127.0.0.1: POST /message
+2025-08-14 17:25:08,334 - INFO - Request POST /message from 127.0.0.1
+2025-08-14 17:25:08,334 - DEBUG - Message POST body: from=admin&to=Mr_Headshot&text=test_message
+2025-08-14 17:25:08,362 - DEBUG - Retrieved 0 messages for user admin
+2025-08-14 17:25:08,389 - DEBUG - Username check for 'Mr_Headshot': True
+2025-08-14 17:25:08,412 - ERROR - Exception occurred while inserting message
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 51, in insert_messages
+    cur.execute("INSERT INTO messages VALUES (%s, %s, %s)", (sender, receiver, content))
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: "admin"
+LINE 1: INSERT INTO messages VALUES ('admin', 'Mr_Headshot', 'test_m...
+                                     ^
+
+2025-08-14 17:25:08,421 - DEBUG - Rendering profile page for user admin. Error: None, Success: Message successfully sent!
+2025-08-14 17:25:08,421 - INFO - Message sent from admin to Mr_Headshot
+2025-08-14 17:25:08,421 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:29:04,456 - INFO - Server socket closed
+2025-08-14 17:29:05,586 - INFO - Server started on 127.0.0.1:8080
+2025-08-14 17:29:09,053 - INFO - Client connected 127.0.0.1:59146
+2025-08-14 17:29:09,146 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-14 17:29:09,147 - INFO - Request GET /login from 127.0.0.1
+2025-08-14 17:29:09,155 - DEBUG - Rendering login page. Error: None
+2025-08-14 17:29:09,156 - INFO - Serving login page to 127.0.0.1
+2025-08-14 17:29:09,157 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:29:09,397 - INFO - Client connected 127.0.0.1:59156
+2025-08-14 17:29:09,397 - DEBUG - Received data from 127.0.0.1: GET /favicon.ico
+2025-08-14 17:29:09,397 - INFO - Request GET /favicon.ico from 127.0.0.1
+2025-08-14 17:29:09,401 - DEBUG - Rendering 404 page
+2025-08-14 17:29:09,402 - ERROR - 404 Not Found: GET /favicon.ico from 127.0.0.1
+2025-08-14 17:29:09,402 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:29:27,021 - INFO - Client connected 127.0.0.1:53692
+2025-08-14 17:29:27,022 - DEBUG - Received data from 127.0.0.1: POST /signin
+2025-08-14 17:29:27,022 - INFO - Request POST /signin from 127.0.0.1
+2025-08-14 17:29:27,022 - DEBUG - Signin attempt: admin
+2025-08-14 17:29:27,055 - DEBUG - Credentials check for 'admin': True
+2025-08-14 17:29:27,074 - DEBUG - Retrieved 0 messages for user admin
+2025-08-14 17:29:27,081 - DEBUG - Rendering profile page for user admin. Error: None, Success: None
+2025-08-14 17:29:27,081 - INFO - User admin logged in, session 0c70d68a-0a49-4ba5-b45a-23dc0ba49fc4
+2025-08-14 17:29:27,081 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:29:27,178 - INFO - Client connected 127.0.0.1:53700
+2025-08-14 17:29:27,178 - ERROR - Exception while handling client 127.0.0.1: not enough values to unpack (expected 2, got 1)
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 185, in connect
+    data = get_data(client_socket, client_address)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 150, in get_data
+    headers_list, body = data.split(b"\r\n\r\n", 1)
+    ^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+2025-08-14 17:29:27,179 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:29:47,378 - INFO - Client connected 127.0.0.1:49174
+2025-08-14 17:29:47,378 - DEBUG - Received data from 127.0.0.1: POST /message
+2025-08-14 17:29:47,378 - INFO - Request POST /message from 127.0.0.1
+2025-08-14 17:29:47,378 - DEBUG - Message POST body: from=admin&to=Mr_Headshot&text=test_message
+2025-08-14 17:29:47,406 - DEBUG - Retrieved 0 messages for user admin
+2025-08-14 17:29:47,423 - DEBUG - Username check for 'Mr_Headshot': True
+2025-08-14 17:29:47,459 - INFO - Message inserted from admin to Mr_Headshot
+2025-08-14 17:29:47,469 - DEBUG - Rendering profile page for user admin. Error: None, Success: Message successfully sent!
+2025-08-14 17:29:47,470 - INFO - Message sent from admin to Mr_Headshot
+2025-08-14 17:29:47,470 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:30:18,304 - INFO - Client connected 127.0.0.1:42620
+2025-08-14 17:30:18,391 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-14 17:30:18,391 - INFO - Request GET /login from 127.0.0.1
+2025-08-14 17:30:18,394 - DEBUG - Rendering login page. Error: None
+2025-08-14 17:30:18,395 - INFO - Serving login page to 127.0.0.1
+2025-08-14 17:30:18,396 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:30:26,974 - INFO - Client connected 127.0.0.1:44344
+2025-08-14 17:30:26,974 - DEBUG - Received data from 127.0.0.1: POST /signin
+2025-08-14 17:30:26,974 - INFO - Request POST /signin from 127.0.0.1
+2025-08-14 17:30:26,974 - DEBUG - Signin attempt: Mr_Headshot
+2025-08-14 17:30:26,997 - DEBUG - Credentials check for 'Mr_Headshot': True
+2025-08-14 17:30:27,019 - DEBUG - Retrieved 1 messages for user Mr_Headshot
+2025-08-14 17:30:27,024 - DEBUG - Rendering profile page for user Mr_Headshot. Error: None, Success: None
+2025-08-14 17:30:27,025 - INFO - User Mr_Headshot logged in, session a4b7165d-1757-4fbc-8ee0-4cdd9b4784c0
+2025-08-14 17:30:27,025 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:52:23,982 - INFO - Server socket closed
+2025-08-14 17:52:30,079 - INFO - Server started on 127.0.0.1:8080
+2025-08-14 17:52:37,242 - INFO - Client connected 127.0.0.1:37280
+2025-08-14 17:52:38,646 - DEBUG - Received data from 127.0.0.1: GET /signin
+2025-08-14 17:52:38,647 - INFO - Request GET /signin from 127.0.0.1
+2025-08-14 17:52:38,659 - DEBUG - Rendering 404 page
+2025-08-14 17:52:38,659 - ERROR - 404 Not Found: GET /signin from 127.0.0.1
+2025-08-14 17:52:38,660 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:52:38,895 - INFO - Client connected 127.0.0.1:37282
+2025-08-14 17:52:38,895 - DEBUG - Received data from 127.0.0.1: GET /favicon.ico
+2025-08-14 17:52:38,896 - INFO - Request GET /favicon.ico from 127.0.0.1
+2025-08-14 17:52:38,897 - DEBUG - Rendering 404 page
+2025-08-14 17:52:38,897 - ERROR - 404 Not Found: GET /favicon.ico from 127.0.0.1
+2025-08-14 17:52:38,898 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:52:48,322 - INFO - Client connected 127.0.0.1:60810
+2025-08-14 17:52:48,390 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-14 17:52:48,391 - INFO - Request GET /login from 127.0.0.1
+2025-08-14 17:52:48,394 - DEBUG - Rendering login page. Error: None
+2025-08-14 17:52:48,394 - INFO - Serving login page to 127.0.0.1
+2025-08-14 17:52:48,395 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:52:56,627 - INFO - Client connected 127.0.0.1:52362
+2025-08-14 17:52:56,655 - DEBUG - Received data from 127.0.0.1: POST /signin
+2025-08-14 17:52:56,655 - INFO - Request POST /signin from 127.0.0.1
+2025-08-14 17:52:56,655 - DEBUG - Signin attempt: Mr_Headshot
+2025-08-14 17:52:56,719 - DEBUG - Credentials check for 'Mr_Headshot': True
+2025-08-14 17:52:56,737 - DEBUG - Retrieved 1 messages for user Mr_Headshot
+2025-08-14 17:52:56,743 - DEBUG - Rendering profile page for user Mr_Headshot. Error: None, Success: None
+2025-08-14 17:52:56,743 - INFO - User Mr_Headshot logged in, session 39dc0dd3-0574-44a4-9a75-c35bf5499676
+2025-08-14 17:52:56,743 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:53:43,333 - INFO - Client connected 127.0.0.1:55800
+2025-08-14 17:53:43,333 - DEBUG - Received data from 127.0.0.1: POST /message
+2025-08-14 17:53:43,333 - INFO - Request POST /message from 127.0.0.1
+2025-08-14 17:53:43,333 - DEBUG - Message POST body: from=Mr_Headshot&to=admin&text=test_message_2
+2025-08-14 17:53:43,354 - DEBUG - Retrieved 1 messages for user Mr_Headshot
+2025-08-14 17:53:43,374 - DEBUG - Username check for 'admin': True
+2025-08-14 17:53:43,394 - INFO - Message inserted from Mr_Headshot to admin
+2025-08-14 17:53:43,400 - DEBUG - Rendering profile page for user Mr_Headshot. Error: None, Success: Message successfully sent!
+2025-08-14 17:53:43,400 - INFO - Message sent from Mr_Headshot to admin
+2025-08-14 17:53:43,400 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:53:47,610 - INFO - Client connected 127.0.0.1:55816
+2025-08-14 17:53:47,696 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-14 17:53:47,696 - INFO - Request GET /login from 127.0.0.1
+2025-08-14 17:53:47,698 - DEBUG - Rendering login page. Error: None
+2025-08-14 17:53:47,698 - INFO - Serving login page to 127.0.0.1
+2025-08-14 17:53:47,698 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:53:53,126 - INFO - Client connected 127.0.0.1:54062
+2025-08-14 17:53:53,127 - DEBUG - Received data from 127.0.0.1: POST /signin
+2025-08-14 17:53:53,127 - INFO - Request POST /signin from 127.0.0.1
+2025-08-14 17:53:53,127 - DEBUG - Signin attempt: admin
+2025-08-14 17:53:53,158 - DEBUG - Credentials check for 'admin': True
+2025-08-14 17:53:53,180 - DEBUG - Retrieved 1 messages for user admin
+2025-08-14 17:53:53,187 - DEBUG - Rendering profile page for user admin. Error: None, Success: None
+2025-08-14 17:53:53,187 - INFO - User admin logged in, session d61e5f3e-f74c-4c52-82fb-ea5ca633af60
+2025-08-14 17:53:53,187 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:55:35,380 - INFO - Server socket closed
+2025-08-14 17:55:40,301 - INFO - Server started on 127.0.0.1:8080
+2025-08-14 17:55:41,640 - INFO - Client connected 127.0.0.1:39498
+2025-08-14 17:55:41,695 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-14 17:55:41,695 - INFO - Request GET /login from 127.0.0.1
+2025-08-14 17:55:41,701 - DEBUG - Rendering login page. Error: None
+2025-08-14 17:55:41,702 - INFO - Serving login page to 127.0.0.1
+2025-08-14 17:55:41,702 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:55:53,209 - INFO - Client connected 127.0.0.1:59746
+2025-08-14 17:55:53,210 - DEBUG - Received data from 127.0.0.1: POST /signin
+2025-08-14 17:55:53,210 - INFO - Request POST /signin from 127.0.0.1
+2025-08-14 17:55:53,210 - DEBUG - Signin attempt: admin
+2025-08-14 17:55:53,232 - DEBUG - Credentials check for 'admin': True
+2025-08-14 17:55:53,258 - DEBUG - Retrieved 1 messages for user admin
+2025-08-14 17:55:53,270 - DEBUG - Rendering profile page for user admin. Error: None, Success: None
+2025-08-14 17:55:53,270 - INFO - User admin logged in, session aa0d1518-e473-4901-a415-f7ec93844365
+2025-08-14 17:55:53,270 - INFO - Closing connection with 127.0.0.1
+2025-08-14 17:55:59,493 - INFO - Server socket closed
