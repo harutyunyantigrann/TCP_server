@@ -24,8 +24,8 @@ def get_messages(username):
     try:
         with psycopg2.connect(
             dbname="tcp_server",
-            user="postgres",
-            password="test_pass_for_tcp",
+            user="select_user",
+            password="select_user_password",
             host="localhost",
             port="5432"
         ) as conn:
@@ -42,8 +42,8 @@ def insert_messages(sender, receiver, content):
     try:
         with psycopg2.connect(
             dbname="tcp_server",
-            user="postgres",
-            password="test_pass_for_tcp",
+            user="insert_user",
+            password="insert_user_password",
             host="localhost",
             port="5432"
         ) as conn:
@@ -59,8 +59,8 @@ def check_username(username):
     try:
         with psycopg2.connect(
             dbname="tcp_server",
-            user="postgres",
-            password="test_pass_for_tcp",
+            user="select_user",
+            password="select_user_password",
             host="localhost",
             port="5432"
         ) as conn:
@@ -79,8 +79,8 @@ def insert_credentials(username, password):
     try:
         with psycopg2.connect(
             dbname="tcp_server",
-            user="postgres",
-            password="test_pass_for_tcp",
+            user="insert_user",
+            password="insert_user_password",
             host="localhost",
             port="5432"
         ) as conn:
@@ -96,8 +96,8 @@ def check_credentials(username, password):
     try:
         with psycopg2.connect(
             dbname="tcp_server",
-            user="postgres",
-            password="test_pass_for_tcp",
+            user="select_user",
+            password="select_user_password",
             host="localhost",
             port="5432"
         ) as conn:

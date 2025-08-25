@@ -324,3 +324,99 @@ ValueError: not enough values to unpack (expected 2, got 1)
 2025-08-14 17:55:53,270 - INFO - User admin logged in, session aa0d1518-e473-4901-a415-f7ec93844365
 2025-08-14 17:55:53,270 - INFO - Closing connection with 127.0.0.1
 2025-08-14 17:55:59,493 - INFO - Server socket closed
+2025-08-25 15:16:55,379 - INFO - Server started on 127.0.0.1:8080
+2025-08-25 15:16:58,226 - INFO - Client connected 127.0.0.1:45008
+2025-08-25 15:16:58,271 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-25 15:16:58,271 - INFO - Request GET /login from 127.0.0.1
+2025-08-25 15:16:58,284 - DEBUG - Rendering login page. Error: None
+2025-08-25 15:16:58,284 - INFO - Serving login page to 127.0.0.1
+2025-08-25 15:16:58,285 - INFO - Closing connection with 127.0.0.1
+2025-08-25 15:16:58,392 - INFO - Client connected 127.0.0.1:45018
+2025-08-25 15:16:58,393 - DEBUG - Received data from 127.0.0.1: GET /favicon.ico
+2025-08-25 15:16:58,394 - INFO - Request GET /favicon.ico from 127.0.0.1
+2025-08-25 15:16:58,397 - DEBUG - Rendering 404 page
+2025-08-25 15:16:58,397 - ERROR - 404 Not Found: GET /favicon.ico from 127.0.0.1
+2025-08-25 15:16:58,398 - INFO - Closing connection with 127.0.0.1
+2025-08-25 15:17:06,555 - INFO - Client connected 127.0.0.1:43510
+2025-08-25 15:17:06,555 - DEBUG - Received data from 127.0.0.1: POST /signin
+2025-08-25 15:17:06,555 - INFO - Request POST /signin from 127.0.0.1
+2025-08-25 15:17:06,555 - DEBUG - Signin attempt: admin
+2025-08-25 15:17:06,615 - DEBUG - Credentials check for 'admin': True
+2025-08-25 15:17:06,636 - DEBUG - Retrieved 1 messages for user admin
+2025-08-25 15:17:06,646 - DEBUG - Rendering profile page for user admin. Error: None, Success: None
+2025-08-25 15:17:06,646 - INFO - User admin logged in, session 0db57975-8809-4a1d-a2d1-5c732f216c44
+2025-08-25 15:17:06,647 - INFO - Closing connection with 127.0.0.1
+2025-08-25 15:17:24,202 - INFO - Client connected 127.0.0.1:37328
+2025-08-25 15:17:24,203 - DEBUG - Received data from 127.0.0.1: POST /message
+2025-08-25 15:17:24,203 - INFO - Request POST /message from 127.0.0.1
+2025-08-25 15:17:24,203 - DEBUG - Message POST body: from=admin&to=Surenchik&text=test_message_3%0D%0A
+2025-08-25 15:17:24,224 - DEBUG - Retrieved 1 messages for user admin
+2025-08-25 15:17:24,244 - DEBUG - Username check for 'Surenchik': True
+2025-08-25 15:17:24,266 - ERROR - Exception occurred while inserting message
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 51, in insert_messages
+    cur.execute("INSERT INTO messages (sender, receiver, content) VALUES (%s, %s, %s)", (sender, receiver, content))
+psycopg2.errors.InsufficientPrivilege: permission denied for sequence messages_id_seq
+
+2025-08-25 15:17:24,275 - DEBUG - Rendering profile page for user admin. Error: None, Success: Message successfully sent!
+2025-08-25 15:17:24,275 - INFO - Message sent from admin to Surenchik
+2025-08-25 15:17:24,275 - INFO - Closing connection with 127.0.0.1
+2025-08-25 15:17:47,544 - INFO - Client connected 127.0.0.1:34080
+2025-08-25 15:17:47,544 - DEBUG - Received data from 127.0.0.1: POST /signin
+2025-08-25 15:17:47,544 - INFO - Request POST /signin from 127.0.0.1
+2025-08-25 15:17:47,545 - DEBUG - Signin attempt: Surenchik
+2025-08-25 15:17:47,566 - DEBUG - Credentials check for 'Surenchik': True
+2025-08-25 15:17:47,584 - DEBUG - Retrieved 0 messages for user Surenchik
+2025-08-25 15:17:47,589 - DEBUG - Rendering profile page for user Surenchik. Error: None, Success: None
+2025-08-25 15:17:47,589 - INFO - User Surenchik logged in, session 1618474c-749a-4b61-b00a-b0d8bca4b833
+2025-08-25 15:17:47,589 - INFO - Closing connection with 127.0.0.1
+2025-08-25 15:18:21,625 - INFO - Client connected 127.0.0.1:60690
+2025-08-25 15:18:21,626 - DEBUG - Received data from 127.0.0.1: POST /message
+2025-08-25 15:18:21,626 - INFO - Request POST /message from 127.0.0.1
+2025-08-25 15:18:21,626 - DEBUG - Message POST body: from=Surenchik&to=admin&text=test_message
+2025-08-25 15:18:21,642 - DEBUG - Retrieved 0 messages for user Surenchik
+2025-08-25 15:18:21,659 - DEBUG - Username check for 'admin': True
+2025-08-25 15:18:21,676 - ERROR - Exception occurred while inserting message
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 51, in insert_messages
+    cur.execute("INSERT INTO messages (sender, receiver, content) VALUES (%s, %s, %s)", (sender, receiver, content))
+psycopg2.errors.InsufficientPrivilege: permission denied for sequence messages_id_seq
+
+2025-08-25 15:18:21,682 - DEBUG - Rendering profile page for user Surenchik. Error: None, Success: Message successfully sent!
+2025-08-25 15:18:21,682 - INFO - Message sent from Surenchik to admin
+2025-08-25 15:18:21,683 - INFO - Closing connection with 127.0.0.1
+2025-08-25 15:25:11,823 - INFO - Server started on 127.0.0.1:8080
+2025-08-25 15:25:25,888 - INFO - Client connected 127.0.0.1:55260
+2025-08-25 15:25:25,997 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-25 15:25:25,997 - INFO - Request GET /login from 127.0.0.1
+2025-08-25 15:25:26,002 - DEBUG - Rendering login page. Error: None
+2025-08-25 15:25:26,002 - INFO - Serving login page to 127.0.0.1
+2025-08-25 15:25:26,002 - INFO - Closing connection with 127.0.0.1
+2025-08-25 15:25:34,304 - INFO - Client connected 127.0.0.1:38714
+2025-08-25 15:25:34,304 - DEBUG - Received data from 127.0.0.1: POST /signin
+2025-08-25 15:25:34,304 - INFO - Request POST /signin from 127.0.0.1
+2025-08-25 15:25:34,305 - DEBUG - Signin attempt: Surenchik
+2025-08-25 15:25:34,326 - DEBUG - Credentials check for 'Surenchik': True
+2025-08-25 15:25:34,351 - DEBUG - Retrieved 0 messages for user Surenchik
+2025-08-25 15:25:34,359 - DEBUG - Rendering profile page for user Surenchik. Error: None, Success: None
+2025-08-25 15:25:34,359 - INFO - User Surenchik logged in, session 9946fb27-de85-419a-a38b-d67640d319cd
+2025-08-25 15:25:34,359 - INFO - Closing connection with 127.0.0.1
+2025-08-25 15:25:46,612 - INFO - Client connected 127.0.0.1:45574
+2025-08-25 15:25:46,613 - DEBUG - Received data from 127.0.0.1: POST /message
+2025-08-25 15:25:46,613 - INFO - Request POST /message from 127.0.0.1
+2025-08-25 15:25:46,613 - DEBUG - Message POST body: from=Surenchik&to=admin&text=test_message
+2025-08-25 15:25:46,633 - DEBUG - Retrieved 0 messages for user Surenchik
+2025-08-25 15:25:46,653 - DEBUG - Username check for 'admin': True
+2025-08-25 15:25:46,676 - INFO - Message inserted from Surenchik to admin
+2025-08-25 15:25:46,682 - DEBUG - Rendering profile page for user Surenchik. Error: None, Success: Message successfully sent!
+2025-08-25 15:25:46,682 - INFO - Message sent from Surenchik to admin
+2025-08-25 15:25:46,682 - INFO - Closing connection with 127.0.0.1
+2025-08-25 15:26:05,262 - INFO - Client connected 127.0.0.1:52428
+2025-08-25 15:26:05,263 - DEBUG - Received data from 127.0.0.1: POST /signin
+2025-08-25 15:26:05,263 - INFO - Request POST /signin from 127.0.0.1
+2025-08-25 15:26:05,263 - DEBUG - Signin attempt: admin
+2025-08-25 15:26:05,279 - DEBUG - Credentials check for 'admin': True
+2025-08-25 15:26:05,298 - DEBUG - Retrieved 2 messages for user admin
+2025-08-25 15:26:05,303 - DEBUG - Rendering profile page for user admin. Error: None, Success: None
+2025-08-25 15:26:05,303 - INFO - User admin logged in, session d38083fa-24c3-41bc-a863-8695686b2ab9
+2025-08-25 15:26:05,303 - INFO - Closing connection with 127.0.0.1
