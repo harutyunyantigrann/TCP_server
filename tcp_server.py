@@ -169,7 +169,11 @@ def get_data(client_socket, client_address):
 
     if content_length > 1048576:
         # If body too large, close connection
-        response = "HTTP/1.1 413 Payload Too Large\r\nContent-Length: 0\r\n\r\n"
+        response = (
+            "HTTP/1.1 413 Payload Too Large\r\n"
+            "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
+            "Content-Length: 0\r\n\r\n"
+        )
         logging.critical(f"Payload too large from {client_address[0]}")
         client_socket.sendall(response.encode())
         client_socket.close()
@@ -203,6 +207,7 @@ def connect(client_socket, client_address):
             body = auth_jinja().encode("utf-8")
             response = (
                 "HTTP/1.1 200 OK\r\n"
+                "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
                 "Content-Type: text/html\r\n"
                 f"Content-Length: {len(body)}\r\n\r\n"
             ).encode("utf-8") + body
@@ -219,6 +224,7 @@ def connect(client_socket, client_address):
                 body = auth_jinja(error_msg="This username is already taken").encode("utf-8")
                 response = (
                     "HTTP/1.1 400 Bad Request\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("utf-8") + body
@@ -229,6 +235,7 @@ def connect(client_socket, client_address):
                 body = auth_jinja(error_msg="You can use only A-Z, a-z, 0-9 in your username!").encode("UTF-8")
                 response = (
                     "HTTP/1.1 400 Bad Request\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("UTF-8") + body
@@ -238,6 +245,7 @@ def connect(client_socket, client_address):
                 body = auth_jinja(error_msg="Password can`t be less than 8 symbols").encode("utf-8")
                 response = (
                     "HTTP/1.1 400 Bad Request\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("utf-8") + body
@@ -248,6 +256,7 @@ def connect(client_socket, client_address):
                 body = auth_jinja(error_msg="You are registered successfully!").encode("utf-8")
                 response = (
                     "HTTP/1.1 200 OK\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("utf-8") + body
@@ -264,6 +273,7 @@ def connect(client_socket, client_address):
                 body = auth_jinja("Username or password can't be empty!").encode("utf-8")
                 response = (
                     "HTTP/1.1 400 Bad Request\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("utf-8") + body
@@ -274,6 +284,7 @@ def connect(client_socket, client_address):
                 body = auth_jinja(error_msg="Invalid username or password").encode("utf-8")
                 response = (
                     "HTTP/1.1 200 OK\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("utf-8") + body
@@ -286,6 +297,7 @@ def connect(client_socket, client_address):
             body = profile_jinja(username, get_messages(username)).encode("utf-8")
             response = (
                 "HTTP/1.1 200 OK\r\n"
+                "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
                 "Content-Type: text/html\r\n"
                 f"Content-Length: {len(body)}\r\n"
                 f"Set-Cookie: session_id={session_id}; HttpOnly; Path=/\r\n\r\n"
@@ -305,6 +317,7 @@ def connect(client_socket, client_address):
                 body = profile_jinja(sender, messages, "Receiver username not found").encode("utf-8")
                 response = (
                     "HTTP/1.1 200 OK\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("utf-8") + body
@@ -317,6 +330,7 @@ def connect(client_socket, client_address):
             body = profile_jinja(sender, messages, None, "Message successfully sent!").encode("utf-8")
             response = (
                 "HTTP/1.1 200 OK\r\n"
+                "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
                 "Content-Type: text/html\r\n"
                 f"Content-Length: {len(body)}\r\n\r\n"
             ).encode("utf-8") + body
@@ -327,6 +341,7 @@ def connect(client_socket, client_address):
             body = notfound_jinja().encode("utf-8")
             response = (
                 "HTTP/1.1 404 Not Found\r\n"
+                "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
                 f"Content-Length: {len(body)}\r\n"
                 "Content-Type: text/html; charset=utf-8\r\n\r\n"
             ).encode("utf-8") + body
