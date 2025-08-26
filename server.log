@@ -420,3 +420,62 @@ psycopg2.errors.InsufficientPrivilege: permission denied for sequence messages_i
 2025-08-25 15:26:05,303 - DEBUG - Rendering profile page for user admin. Error: None, Success: None
 2025-08-25 15:26:05,303 - INFO - User admin logged in, session d38083fa-24c3-41bc-a863-8695686b2ab9
 2025-08-25 15:26:05,303 - INFO - Closing connection with 127.0.0.1
+2025-08-26 18:31:04,182 - INFO - Server started on 127.0.0.1:8080
+2025-08-26 18:31:08,157 - INFO - Client connected 127.0.0.1:40610
+2025-08-26 18:31:08,233 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-26 18:31:08,234 - INFO - Request GET /login from 127.0.0.1
+2025-08-26 18:31:08,243 - DEBUG - Rendering login page. Error: None
+2025-08-26 18:31:08,244 - INFO - Serving login page to 127.0.0.1
+2025-08-26 18:31:08,244 - INFO - Closing connection with 127.0.0.1
+2025-08-26 18:31:54,769 - INFO - Server socket closed
+2025-08-26 18:31:58,060 - ERROR - Fatal error in server socket: [Errno 98] Address already in use
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 348, in <module>
+    server_socket.bind(("127.0.0.1", 8080))
+OSError: [Errno 98] Address already in use
+2025-08-26 18:31:58,060 - INFO - Server socket closed
+2025-08-26 18:31:59,118 - ERROR - Fatal error in server socket: [Errno 98] Address already in use
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 348, in <module>
+    server_socket.bind(("127.0.0.1", 8080))
+OSError: [Errno 98] Address already in use
+2025-08-26 18:31:59,119 - INFO - Server socket closed
+2025-08-26 18:32:03,161 - ERROR - Fatal error in server socket: [Errno 98] Address already in use
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 348, in <module>
+    server_socket.bind(("127.0.0.1", 8080))
+OSError: [Errno 98] Address already in use
+2025-08-26 18:32:03,161 - INFO - Server socket closed
+2025-08-26 18:32:04,098 - ERROR - Fatal error in server socket: [Errno 98] Address already in use
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 348, in <module>
+    server_socket.bind(("127.0.0.1", 8080))
+OSError: [Errno 98] Address already in use
+2025-08-26 18:32:04,099 - INFO - Server socket closed
+2025-08-26 18:32:06,851 - ERROR - Fatal error in server socket: [Errno 98] Address already in use
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 348, in <module>
+    server_socket.bind(("127.0.0.1", 8080))
+OSError: [Errno 98] Address already in use
+2025-08-26 18:32:06,852 - INFO - Server socket closed
+2025-08-26 18:32:07,900 - ERROR - Fatal error in server socket: [Errno 98] Address already in use
+Traceback (most recent call last):
+  File "/home/tigran/Desktop/tcp_server/tcp_server.py", line 348, in <module>
+    server_socket.bind(("127.0.0.1", 8080))
+OSError: [Errno 98] Address already in use
+2025-08-26 18:32:07,901 - INFO - Server socket closed
+2025-08-26 18:34:46,936 - INFO - Server started on 127.0.0.1:8080
+2025-08-26 18:34:50,153 - INFO - Client connected 127.0.0.1:47288
+2025-08-26 18:34:50,153 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-26 18:34:50,153 - INFO - Request GET /login from 127.0.0.1
+2025-08-26 18:34:50,158 - DEBUG - Rendering login page. Error: None
+2025-08-26 18:34:50,158 - INFO - Serving login page to 127.0.0.1
+2025-08-26 18:34:50,159 - INFO - Closing connection with 127.0.0.1
+2025-08-26 18:35:00,817 - INFO - Client connected 127.0.0.1:49336
+2025-08-26 18:35:00,817 - DEBUG - Received data from 127.0.0.1: POST /signup
+2025-08-26 18:35:00,817 - INFO - Request POST /signup from 127.0.0.1
+2025-08-26 18:35:00,818 - DEBUG - Signup attempt: <script>alert("Test")</script>
+2025-08-26 18:35:00,900 - DEBUG - Username check for '<script>alert("Test")</script>': False
+2025-08-26 18:35:00,901 - WARNING - The user with IP: 127.0.0.1 try to signup with wrong symbols. Text: <script>alert("Test")</script>
+2025-08-26 18:35:00,903 - DEBUG - Rendering login page. Error: You can use only A-Z, a-z, 0-9 in your username!
+2025-08-26 18:35:00,903 - INFO - Closing connection with 127.0.0.1

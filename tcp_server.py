@@ -5,6 +5,7 @@ import logging
 import psycopg2
 from urllib.parse import parse_qs, unquote_plus
 import uuid
+import re
 
 # --- Logging configuration ---
 logging.basicConfig(
@@ -17,6 +18,9 @@ logging.basicConfig(
 # --- Session storage ---
 sessions = {}
 
+def is_valid_username(_username):
+    USERNAME_RE = re.compile(r"^[A-Za-z0-9]{3,20}$")
+    return USERNAME_RE.fullmatch(_username)
 # --- Database functions ---
 
 def get_messages(username):
@@ -218,6 +222,16 @@ def connect(client_socket, client_address):
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("utf-8") + body
+                client_socket.sendall(response)
+                return
+            elif not is_valid_username(username):
+                logging.warning(F"The user with IP: {client_address[0]} try to signup with wrong symbols. Text: {username}")
+                body = auth_jinja(error_msg="You can use only A-Z, a-z, 0-9 in your username!").encode("UTF-8")
+                response = (
+                    "HTTP/1.1 400 Bad Request\r\n"
+                    "Content-Type: text/html\r\n"
+                    f"Content-Length: {len(body)}\r\n\r\n"
+                ).encode("UTF-8") + body
                 client_socket.sendall(response)
                 return
             elif len(password) < 8:
