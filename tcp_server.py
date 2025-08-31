@@ -6,6 +6,7 @@ import psycopg2
 from urllib.parse import parse_qs, unquote_plus
 import uuid
 import re
+import secrets
 
 # --- Logging configuration ---
 logging.basicConfig(
@@ -17,7 +18,7 @@ logging.basicConfig(
 
 # --- Session storage ---
 sessions = {}
-
+csrf_tokens = {}
 def is_valid_username(_username):
     USERNAME_RE = re.compile(r"^[A-Za-z0-9]{3,20}$")
     return USERNAME_RE.fullmatch(_username)
@@ -124,7 +125,7 @@ def auth_jinja(error_msg=None):
     logging.debug(f"Rendering login page. Error: {error_msg}")
     return html.render(error=error_msg)
 
-def profile_jinja(_username, _rows, _error=None, _success=None):
+def profile_jinja(_username, _rows,  _csrf_token, _error=None, _success=None):
     """Render the profile page with messages and optional error/success messages"""
     env = Environment(loader=FileSystemLoader('Templates'))
     body = env.get_template('profile.html')
@@ -134,7 +135,7 @@ def profile_jinja(_username, _rows, _error=None, _success=None):
                           "text": message[1], 
                           "time":message[2].strftime("%Y-%m-%d %H:%M")})
     logging.debug(f"Rendering profile page for user {_username}. Error: {_error}, Success: {_success}")
-    return body.render(username=_username, messages=_messages, error=_error, success=_success)
+    return body.render(username=_username, messages=_messages, csrf_token=_csrf_token, error=_error, success=_success)
 
 def notfound_jinja():
     """Render a 404 page"""
@@ -171,7 +172,7 @@ def get_data(client_socket, client_address):
         # If body too large, close connection
         response = (
             "HTTP/1.1 413 Payload Too Large\r\n"
-            "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
+            "Content-Security-Policy: default-src 'self'; script-src 'self'; img-src 'self'\r\n"
             "Content-Length: 0\r\n\r\n"
         )
         logging.critical(f"Payload too large from {client_address[0]}")
@@ -207,11 +208,42 @@ def connect(client_socket, client_address):
             body = auth_jinja().encode("utf-8")
             response = (
                 "HTTP/1.1 200 OK\r\n"
-                "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
+                "Content-Security-Policy: default-src 'self'; script-src 'self'; img-src 'self'; style-src 'self'\r\n"
                 "Content-Type: text/html\r\n"
                 f"Content-Length: {len(body)}\r\n\r\n"
             ).encode("utf-8") + body
             logging.info(f"Serving login page to {client_address[0]}")
+        # --- GET /static/... ---
+        elif method == "GET" and path.startswith("/static/"):
+            # Get the file path by stripping the leading slash
+            filepath = path.lstrip("/")
+            
+            logging.debug(f"Requested static file: {filepath} from {client_address[0]}")
+            
+            try:
+                # Open the file in binary mode
+                with open(filepath, "rb") as f:
+                    body = f.read()
+                    logging.info(f"Static file {filepath} successfully read ({len(body)} bytes)")
+            except FileNotFoundError:
+                # If file is not found, send 404 response
+                body = b"File not found\r\n"
+                response = (
+                    "HTTP/1.1 404 Not Found\r\n"
+                    "Content-Type: text/plain\r\n\r\n"
+                ).encode("UTF-8") + body
+                logging.warning(f"Static file not found: {filepath} requested by {client_address[0]}")
+                client_socket.sendall(response)
+                return
+
+            # If the file is found, create the HTTP response with proper Content-Type
+            response = (
+                "HTTP/1.1 200 OK\r\n"
+                "Content-Type: text/css\r\n"  # Let the browser know this is CSS
+                f"Content-Length: {len(body)}\r\n\r\n"
+            ).encode("UTF-8") + body
+
+            logging.debug(f"Serving static file {filepath} to {client_address[0]}")
 
         # --- POST /signup ---
         elif method == "POST" and path == "/signup":
@@ -224,7 +256,7 @@ def connect(client_socket, client_address):
                 body = auth_jinja(error_msg="This username is already taken").encode("utf-8")
                 response = (
                     "HTTP/1.1 400 Bad Request\r\n"
-                    "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; img-src 'self'\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("utf-8") + body
@@ -235,7 +267,7 @@ def connect(client_socket, client_address):
                 body = auth_jinja(error_msg="You can use only A-Z, a-z, 0-9 in your username!").encode("UTF-8")
                 response = (
                     "HTTP/1.1 400 Bad Request\r\n"
-                    "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; img-src 'self'\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("UTF-8") + body
@@ -245,7 +277,7 @@ def connect(client_socket, client_address):
                 body = auth_jinja(error_msg="Password can`t be less than 8 symbols").encode("utf-8")
                 response = (
                     "HTTP/1.1 400 Bad Request\r\n"
-                    "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; img-src 'self'\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("utf-8") + body
@@ -256,7 +288,7 @@ def connect(client_socket, client_address):
                 body = auth_jinja(error_msg="You are registered successfully!").encode("utf-8")
                 response = (
                     "HTTP/1.1 200 OK\r\n"
-                    "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; img-src 'self'\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("utf-8") + body
@@ -273,7 +305,7 @@ def connect(client_socket, client_address):
                 body = auth_jinja("Username or password can't be empty!").encode("utf-8")
                 response = (
                     "HTTP/1.1 400 Bad Request\r\n"
-                    "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; img-src 'self'\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("utf-8") + body
@@ -284,7 +316,7 @@ def connect(client_socket, client_address):
                 body = auth_jinja(error_msg="Invalid username or password").encode("utf-8")
                 response = (
                     "HTTP/1.1 200 OK\r\n"
-                    "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; img-src 'self'\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("utf-8") + body
@@ -294,10 +326,13 @@ def connect(client_socket, client_address):
             # Successful login
             session_id = uuid.uuid4()
             sessions[session_id] = username
-            body = profile_jinja(username, get_messages(username)).encode("utf-8")
+            csrf_token = secrets.token_hex(32)
+            csrf_tokens[session_id] = csrf_token
+            logging.debug(f"We generate CSRF token: {csrf_token}")
+            body = profile_jinja(username, get_messages(username), csrf_token).encode("utf-8")
             response = (
                 "HTTP/1.1 200 OK\r\n"
-                "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
+                "Content-Security-Policy: default-src 'self'; script-src 'self'; img-src 'self'\r\n"
                 "Content-Type: text/html\r\n"
                 f"Content-Length: {len(body)}\r\n"
                 f"Set-Cookie: session_id={session_id}; HttpOnly; Path=/\r\n\r\n"
@@ -311,37 +346,57 @@ def connect(client_socket, client_address):
             sender = body_parsed.get('from', [None])[0]
             receiver = body_parsed.get('to', [None])[0]
             content = body_parsed.get('text', [None])[0]
+            csrf_token = body_parsed.get('csrf_token', [None])[0]
             messages = get_messages(sender)
+            cookie_header = headers.get('cookie')
+            if cookie_header:
+                cookies = cookie_header.split(";")
+                for cookie in cookies:
+                    name, _, value = cookie.strip().partition("=")
+                    if name == "session_id":
+                        session_id = value
+                        break
+            # CSRF tokens equal        
+            if csrf_tokens.get(session_id) == csrf_token:
+                logging.debug("CSRF tokens is equal!")
+                if not check_username(receiver):
+                    body = profile_jinja(sender, messages, "Receiver username not found").encode("utf-8")
+                    response = (
+                        "HTTP/1.1 200 OK\r\n"
+                        "Content-Security-Policy: default-src 'self'; script-src 'self'; img-src 'self'\r\n"
+                        "Content-Type: text/html\r\n"
+                        f"Content-Length: {len(body)}\r\n\r\n"
+                    ).encode("utf-8") + body
+                    client_socket.sendall(response)
+                    logging.warning(f"Message failed: receiver {receiver} not found")
+                    client_socket.close()
+                    return
 
-            if not check_username(receiver):
-                body = profile_jinja(sender, messages, "Receiver username not found").encode("utf-8")
+                insert_messages(sender, receiver, content)
+                body = profile_jinja(sender, messages, None, "Message successfully sent!").encode("utf-8")
                 response = (
                     "HTTP/1.1 200 OK\r\n"
-                    "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; img-src 'self'\r\n"
                     "Content-Type: text/html\r\n"
                     f"Content-Length: {len(body)}\r\n\r\n"
                 ).encode("utf-8") + body
+                logging.info(f"Message sent from {sender} to {receiver}")
+            else: 
+                logging.critical(f"CSRF tokens is not equal, IP address: {client_address[0]}")
+                body = profile_jinja(sender, messages, csrf_tokens[session_id], "Invalid CSRF token, please say about it to your administrator!").encode("UTF-8")
+                response = (
+                    "HTTP/1.1 200 OK\r\n"
+                    "Content-Security-Policy: default-src 'self'; script-src 'self'; img-src 'self'\r\n"
+                    "Content-Type: text/html\r\n"
+                    f"Content-Length: {len(body)}\r\n"
+                ).encode("UTF-8")+body
                 client_socket.sendall(response)
-                logging.warning(f"Message failed: receiver {receiver} not found")
-                client_socket.close()
-                return
-
-            insert_messages(sender, receiver, content)
-            body = profile_jinja(sender, messages, None, "Message successfully sent!").encode("utf-8")
-            response = (
-                "HTTP/1.1 200 OK\r\n"
-                "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
-                "Content-Type: text/html\r\n"
-                f"Content-Length: {len(body)}\r\n\r\n"
-            ).encode("utf-8") + body
-            logging.info(f"Message sent from {sender} to {receiver}")
-
         # --- Default: 404 Not Found ---
         else:
             body = notfound_jinja().encode("utf-8")
             response = (
                 "HTTP/1.1 404 Not Found\r\n"
-                "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'\r\n"
+                "Content-Security-Policy: default-src 'self'; script-src 'self'; img-src 'self'\r\n"
                 f"Content-Length: {len(body)}\r\n"
                 "Content-Type: text/html; charset=utf-8\r\n\r\n"
             ).encode("utf-8") + body

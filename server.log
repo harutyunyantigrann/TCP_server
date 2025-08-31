@@ -479,3 +479,112 @@ OSError: [Errno 98] Address already in use
 2025-08-26 18:35:00,901 - WARNING - The user with IP: 127.0.0.1 try to signup with wrong symbols. Text: <script>alert("Test")</script>
 2025-08-26 18:35:00,903 - DEBUG - Rendering login page. Error: You can use only A-Z, a-z, 0-9 in your username!
 2025-08-26 18:35:00,903 - INFO - Closing connection with 127.0.0.1
+2025-08-27 19:21:54,656 - INFO - Server started on 127.0.0.1:8080
+2025-08-27 19:21:59,046 - INFO - Client connected 127.0.0.1:60852
+2025-08-27 19:21:59,156 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-27 19:21:59,156 - INFO - Request GET /login from 127.0.0.1
+2025-08-27 19:21:59,163 - DEBUG - Rendering login page. Error: None
+2025-08-27 19:21:59,163 - INFO - Serving login page to 127.0.0.1
+2025-08-27 19:21:59,164 - INFO - Closing connection with 127.0.0.1
+2025-08-27 19:25:50,513 - INFO - Server started on 127.0.0.1:8080
+2025-08-27 19:25:52,662 - INFO - Client connected 127.0.0.1:54876
+2025-08-27 19:25:55,158 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-27 19:25:55,158 - INFO - Request GET /login from 127.0.0.1
+2025-08-27 19:25:55,162 - DEBUG - Rendering login page. Error: None
+2025-08-27 19:25:55,163 - INFO - Serving login page to 127.0.0.1
+2025-08-27 19:25:55,163 - INFO - Closing connection with 127.0.0.1
+2025-08-27 19:25:55,272 - INFO - Client connected 127.0.0.1:54890
+2025-08-27 19:25:55,272 - DEBUG - Received data from 127.0.0.1: GET /favicon.ico
+2025-08-27 19:25:55,272 - INFO - Request GET /favicon.ico from 127.0.0.1
+2025-08-27 19:25:55,274 - DEBUG - Rendering 404 page
+2025-08-27 19:25:55,274 - ERROR - 404 Not Found: GET /favicon.ico from 127.0.0.1
+2025-08-27 19:25:55,274 - INFO - Closing connection with 127.0.0.1
+2025-08-31 12:07:58,443 - INFO - Server started on 127.0.0.1:8080
+2025-08-31 12:08:07,184 - INFO - Client connected 127.0.0.1:42198
+2025-08-31 12:08:07,258 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-31 12:08:07,258 - INFO - Request GET /login from 127.0.0.1
+2025-08-31 12:08:07,262 - DEBUG - Rendering login page. Error: None
+2025-08-31 12:08:07,262 - INFO - Serving login page to 127.0.0.1
+2025-08-31 12:08:07,263 - INFO - Closing connection with 127.0.0.1
+2025-08-31 12:37:44,140 - INFO - Server started on 127.0.0.1:8080
+2025-08-31 12:37:49,934 - INFO - Client connected 127.0.0.1:52390
+2025-08-31 12:37:50,019 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-31 12:37:50,020 - INFO - Request GET /login from 127.0.0.1
+2025-08-31 12:37:50,033 - DEBUG - Rendering login page. Error: None
+2025-08-31 12:37:50,033 - INFO - Serving login page to 127.0.0.1
+2025-08-31 12:37:50,033 - INFO - Closing connection with 127.0.0.1
+2025-08-31 12:37:50,097 - INFO - Client connected 127.0.0.1:52394
+2025-08-31 12:37:50,097 - DEBUG - Received data from 127.0.0.1: GET /static/auth-style.css
+2025-08-31 12:37:50,097 - INFO - Request GET /static/auth-style.css from 127.0.0.1
+2025-08-31 12:37:50,097 - INFO - Closing connection with 127.0.0.1
+2025-08-31 12:40:06,056 - INFO - Server socket closed
+2025-08-31 12:40:33,417 - INFO - Server started on 127.0.0.1:8080
+2025-08-31 12:40:36,430 - INFO - Client connected 127.0.0.1:33066
+2025-08-31 12:40:36,527 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-31 12:40:36,527 - INFO - Request GET /login from 127.0.0.1
+2025-08-31 12:40:36,531 - DEBUG - Rendering login page. Error: None
+2025-08-31 12:40:36,531 - INFO - Serving login page to 127.0.0.1
+2025-08-31 12:40:36,531 - INFO - Closing connection with 127.0.0.1
+2025-08-31 12:40:36,584 - INFO - Client connected 127.0.0.1:33070
+2025-08-31 12:40:36,584 - DEBUG - Received data from 127.0.0.1: GET /static/auth-style.css
+2025-08-31 12:40:36,584 - INFO - Request GET /static/auth-style.css from 127.0.0.1
+2025-08-31 12:40:36,584 - DEBUG - Requested static file: static/auth-style.css from 127.0.0.1
+2025-08-31 12:40:36,584 - WARNING - Static file not found: static/auth-style.css requested by 127.0.0.1
+2025-08-31 12:40:36,584 - INFO - Closing connection with 127.0.0.1
+2025-08-31 12:43:40,228 - INFO - Server socket closed
+2025-08-31 12:43:42,908 - INFO - Server started on 127.0.0.1:8080
+2025-08-31 12:43:46,618 - INFO - Client connected 127.0.0.1:46472
+2025-08-31 12:43:46,701 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-31 12:43:46,701 - INFO - Request GET /login from 127.0.0.1
+2025-08-31 12:43:46,705 - DEBUG - Rendering login page. Error: None
+2025-08-31 12:43:46,705 - INFO - Serving login page to 127.0.0.1
+2025-08-31 12:43:46,705 - INFO - Closing connection with 127.0.0.1
+2025-08-31 12:43:46,754 - INFO - Client connected 127.0.0.1:46486
+2025-08-31 12:43:46,755 - DEBUG - Received data from 127.0.0.1: GET /static/auth-style.css
+2025-08-31 12:43:46,755 - INFO - Request GET /static/auth-style.css from 127.0.0.1
+2025-08-31 12:43:46,755 - DEBUG - Requested static file: static/auth-style.css from 127.0.0.1
+2025-08-31 12:43:46,755 - INFO - Static file static/auth-style.css successfully read (1141 bytes)
+2025-08-31 12:43:46,755 - DEBUG - Serving static file static/auth-style.css to 127.0.0.1
+2025-08-31 12:43:46,755 - INFO - Closing connection with 127.0.0.1
+2025-08-31 12:44:06,833 - INFO - Client connected 127.0.0.1:38906
+2025-08-31 12:44:06,833 - DEBUG - Received data from 127.0.0.1: POST /signin
+2025-08-31 12:44:06,833 - INFO - Request POST /signin from 127.0.0.1
+2025-08-31 12:44:06,833 - DEBUG - Signin attempt: admin
+2025-08-31 12:44:06,914 - DEBUG - Credentials check for 'admin': True
+2025-08-31 12:44:06,916 - DEBUG - We generate CSRF token: e20044efbae5ee5cb1802ac868d4a7ad87f4854ec7f7d5c3abd46c39b4192c32
+2025-08-31 12:44:06,949 - DEBUG - Retrieved 2 messages for user admin
+2025-08-31 12:44:06,959 - DEBUG - Rendering profile page for user admin. Error: None, Success: None
+2025-08-31 12:44:06,959 - INFO - User admin logged in, session 8cfe23b6-ca71-472b-b2c5-f750e23224e2
+2025-08-31 12:44:06,960 - INFO - Closing connection with 127.0.0.1
+2025-08-31 12:48:30,006 - INFO - Server socket closed
+2025-08-31 12:48:32,009 - INFO - Server started on 127.0.0.1:8080
+2025-08-31 12:48:37,048 - INFO - Client connected 127.0.0.1:36282
+2025-08-31 12:48:37,129 - DEBUG - Received data from 127.0.0.1: GET /login
+2025-08-31 12:48:37,129 - INFO - Request GET /login from 127.0.0.1
+2025-08-31 12:48:37,134 - DEBUG - Rendering login page. Error: None
+2025-08-31 12:48:37,134 - INFO - Serving login page to 127.0.0.1
+2025-08-31 12:48:37,134 - INFO - Closing connection with 127.0.0.1
+2025-08-31 12:48:37,185 - INFO - Client connected 127.0.0.1:36292
+2025-08-31 12:48:37,186 - DEBUG - Received data from 127.0.0.1: GET /static/auth-style.css
+2025-08-31 12:48:37,186 - INFO - Request GET /static/auth-style.css from 127.0.0.1
+2025-08-31 12:48:37,186 - DEBUG - Requested static file: static/auth-style.css from 127.0.0.1
+2025-08-31 12:48:37,186 - INFO - Static file static/auth-style.css successfully read (1141 bytes)
+2025-08-31 12:48:37,186 - DEBUG - Serving static file static/auth-style.css to 127.0.0.1
+2025-08-31 12:48:37,186 - INFO - Closing connection with 127.0.0.1
+2025-08-31 12:48:41,273 - INFO - Client connected 127.0.0.1:39360
+2025-08-31 12:48:41,273 - DEBUG - Received data from 127.0.0.1: POST /signin
+2025-08-31 12:48:41,273 - INFO - Request POST /signin from 127.0.0.1
+2025-08-31 12:48:41,273 - DEBUG - Signin attempt: admin
+2025-08-31 12:48:41,301 - DEBUG - Credentials check for 'admin': True
+2025-08-31 12:48:41,301 - DEBUG - We generate CSRF token: 6386807890b385f39f4fa782247daeb29e65bcd7d87877bfd83666d32ca249ae
+2025-08-31 12:48:41,323 - DEBUG - Retrieved 2 messages for user admin
+2025-08-31 12:48:41,331 - DEBUG - Rendering profile page for user admin. Error: None, Success: None
+2025-08-31 12:48:41,331 - INFO - User admin logged in, session c8c49675-5086-4d2d-a7bd-e0a99a3b3fbf
+2025-08-31 12:48:41,332 - INFO - Closing connection with 127.0.0.1
+2025-08-31 12:48:41,367 - INFO - Client connected 127.0.0.1:39362
+2025-08-31 12:48:41,368 - DEBUG - Received data from 127.0.0.1: GET /static/profile-style.css
+2025-08-31 12:48:41,368 - INFO - Request GET /static/profile-style.css from 127.0.0.1
+2025-08-31 12:48:41,368 - DEBUG - Requested static file: static/profile-style.css from 127.0.0.1
+2025-08-31 12:48:41,368 - INFO - Static file static/profile-style.css successfully read (2321 bytes)
+2025-08-31 12:48:41,368 - DEBUG - Serving static file static/profile-style.css to 127.0.0.1
+2025-08-31 12:48:41,368 - INFO - Closing connection with 127.0.0.1
